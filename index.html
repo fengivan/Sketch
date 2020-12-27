@@ -1,0 +1,56 @@
+<style>   
+.container {
+    display: grid;
+    width: 25vw;
+    height: 25vw;
+    position: absolute;
+    background-color: white;
+    border: solid black 2px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.mouseover
+{
+    background-color: black;
+}
+}
+
+</style>
+<html>
+    <body>
+    <div class = "container"></div>
+    </body>
+</html>
+
+<script>
+const container = document.querySelector('.container');
+window.addEventListener('keydown', clear);
+createGrid(64);
+
+function createGrid (gridNumber) { 
+    let gridArea = gridNumber * gridNumber;
+    for (let i = 1; i <= gridArea; i++) {
+        let gridItem = document.createElement('div');
+        container.style.gridTemplateColumns = `repeat(${gridNumber}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${gridNumber}, 1fr)`;
+        container.insertAdjacentElement('beforeend', gridItem);
+    } 
+    var gridPixels = container.querySelectorAll('div');
+    gridPixels.forEach(gridPixel => gridPixel.addEventListener('mouseover', color));
+}
+function color()
+{
+    this.classList.add('mouseover');
+}
+function clear()
+{
+    const all = document.querySelectorAll('div');
+    for(let i=0; i<all.length; i++)
+    {
+        all[i].classList.remove('mouseover');
+    }
+}
+</script>
